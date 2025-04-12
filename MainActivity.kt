@@ -3,6 +3,7 @@ package com.example.playeropener
 import android.app.*
 import android.content.*
 import android.graphics.*
+import android.net.Uri
 import android.os.*
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
@@ -29,8 +30,8 @@ class MainActivity : AppCompatActivity() {
                     }
                     MotionEvent.ACTION_UP -> {
                         val duration = System.currentTimeMillis() - downTime
-                        if (duration >= 1000) {
-                            openWebViewAndRemoveOverlay()
+                        if (duration >= 2000) {
+                            openChromeAndRemoveOverlay()
                             true
                         } else {
                             false
@@ -41,6 +42,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        // Overlay yerleşim parametreleri
         val layoutParams = WindowManager.LayoutParams(
             WindowManager.LayoutParams.MATCH_PARENT,
             WindowManager.LayoutParams.MATCH_PARENT,
@@ -60,10 +62,21 @@ class MainActivity : AppCompatActivity() {
         moveTaskToBack(true)
     }
 
-    private fun openWebViewAndRemoveOverlay() {
-        val intent = Intent(this, ZoomedWebViewActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        startActivity(intent)
+    private fun openChromeAndRemoveOverlay() {
+        val url = "https://www.google.com.tr"
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url)).apply {
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            setPackage("com.android.chrome")
+        }
+
+        try {
+            startActivity(intent)
+        } catch (e: ActivityNotFoundException) {
+            val fallbackIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url)).apply {
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            }
+            startActivity(fallbackIntent)
+        }
 
         overlayView?.let {
             windowManager.removeView(it)
@@ -118,7 +131,7 @@ class MainActivity : AppCompatActivity() {
                 MotionEvent.ACTION_UP -> {
                     val duration = System.currentTimeMillis() - downTime
                     if (duration >= 2000) {
-                        openWebViewAndRemoveOverlay()
+                        openChromeAndRemoveOverlay()
                         true
                     } else {
                         false
