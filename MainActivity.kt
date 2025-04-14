@@ -61,8 +61,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun openWebViewAndRemoveOverlay() {
-        val intent = Intent(this, ZoomedWebViewActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        val intent = Intent(this, ZoomedWebViewActivity::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            putExtra("unique_id", System.currentTimeMillis()) // Benzersiz veri ile yeni aktivite
+        }
         startActivity(intent)
 
         overlayView?.let {
@@ -79,6 +81,7 @@ class MainActivity : AppCompatActivity() {
             }, 50)
         }, 60000)
     }
+
 
     private fun moveToHomeScreen() {
         val intent = Intent(Intent.ACTION_MAIN)
