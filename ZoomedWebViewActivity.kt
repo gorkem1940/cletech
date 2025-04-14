@@ -22,7 +22,7 @@ class ZoomedWebViewActivity : AppCompatActivity() {
 
         webView.webViewClient = WebViewClient()
         webView.setInitialScale(125) // %125 zoom
-        webView.loadUrl("https://cletech.com.tr/en")
+        webView.loadUrl("https://webnav.poilabs.com/?placeId=673c7846-ea6d-4dfb-b8a2-d32f49493167")
     }
 
     override fun onDestroy() {
