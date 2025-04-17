@@ -22,7 +22,7 @@ class ZoomedWebViewActivity : AppCompatActivity() {
 
         webView.webViewClient = WebViewClient()
         webView.setInitialScale(125) // %125 zoom
-        webView.loadUrl("https://www.midtown.com.tr/24207-2/")
+        webView.loadUrl("https://inmapper.com/zorlucenter/?mode=web&lang=tr&id=ID-245&toTitle=Zorlu%20PSM%20Metro%20Kat%C4%B1&G%20Store")
     }
 
     override fun onDestroy() {
