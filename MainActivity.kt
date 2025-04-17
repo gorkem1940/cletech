@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     MotionEvent.ACTION_UP -> {
                         val duration = System.currentTimeMillis() - downTime
-                        if (duration >= 1000) {
+                        if (duration >= 50) {
                             openWebViewAndRemoveOverlay()
                             true
                         } else {
