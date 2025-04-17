@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
                 setupOverlayView()
                 setupLongPressListener()
             }, 50)
-        }, 60000)
+        }, 25000)
     }
 
 
