@@ -22,12 +22,12 @@ class ZoomedWebViewActivity : AppCompatActivity() {
 
         webView.webViewClient = WebViewClient()
         webView.setInitialScale(125) // %125 zoom
-        webView.loadUrl("https://inmapper.com/zorlucenter/?mode=web&lang=tr&id=ID-245&toTitle=Zorlu%20PSM%20Metro%20Kat%C4%B1&G%20Store")
+        webView.loadUrl("https://webnav.poilabs.com/?placeId=35cc7eba-1187-39e1-0b54-5bd017227c3f&language=en")
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        // Hafızayı temizle
+        //Hafızayı temizle
         (findViewById<WebView>(android.R.id.content)).destroy()
     }
 }
