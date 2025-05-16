@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     MotionEvent.ACTION_UP -> {
                         val duration = System.currentTimeMillis() - downTime
-                        if (duration >= 50) {
+                        if (duration >= 50) { // uygulama ilk çalıştığında 0.5 saniyelik uzun basımı algılayacak.
                             openWebViewAndRemoveOverlay()
                             true
                         } else {
@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
     private fun openWebViewAndRemoveOverlay() {
         val intent = Intent(this, ZoomedWebViewActivity::class.java).apply {
             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            putExtra("unique_id", System.currentTimeMillis()) // Benzersiz veri ile yeni aktivite
+            putExtra("unique_id", System.currentTimeMillis()) //Yeni aktivite
         }
         startActivity(intent)
 
@@ -78,8 +78,8 @@ class MainActivity : AppCompatActivity() {
             handler.postDelayed({
                 setupOverlayView()
                 setupLongPressListener()
-            }, 50)
-        }, 25000)
+            }, 50) // uzun basmayı 0.5 saniye olarak algılayacak.
+        }, 25000) // 25 saniye sonra ana ekrana geri dönecek.
     }
 
 
@@ -120,7 +120,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 MotionEvent.ACTION_UP -> {
                     val duration = System.currentTimeMillis() - downTime
-                    if (duration >= 50) {
+                    if (duration >= 50) { // ana ekrana geri döndükten sonra 0.5 saniye ekrana dokunmayı algılar.
                         openWebViewAndRemoveOverlay()
                         true
                     } else {
